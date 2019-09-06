@@ -42,13 +42,14 @@ class CommandLine:
     
         
 class Player:
-    def __init__(self, num_hands, num_fingers):
+    def __init__(self, player_id,num_hands, num_fingers):
         self.hands = [Hand(num_fingers) for x in range(num_hands)]
+        self.id = player_id
         
         
 class Human(Player):
     def get_next_move(self):
-        move = input("Your Turn: ")
+        move = input("Human " + str(self.id) + "'s turn: ")
     
 class Bot(Player):
     pass
@@ -64,8 +65,11 @@ class Game:
         self.is_over = False
         self.ui  = CommandLine()
         
-        self.players = [Human(num_hands, num_fingers) for x in range(num_human_players)]
-        self.players += [Bot(num_hands, num_fingers) for x in range(num_bot_players)]
+        self.players = [Human(x+1, num_hands, num_fingers) for x in range(num_human_players)]
+        self.players += [Bot(x+1, num_hands, num_fingers) for x in range(num_bot_players)]
+        
+        print("Humans: ", self.num_human_players, "\nBots: ", self.num_bot_players, 
+              "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
     
     def play(self):
         """Game Loop"""
