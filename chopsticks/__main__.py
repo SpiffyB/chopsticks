@@ -5,10 +5,12 @@ Created on 6 Sep 2019
 '''
 
 import core
+import sys
 
 
 def main():
-    pass
+    g = core.Game(sys.argv[0], sys.argv[1], sys.argv[2], sys.argv[3])
+    g.play()
 
 
 if __name__ == '__main__':
