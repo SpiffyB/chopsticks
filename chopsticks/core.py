@@ -25,18 +25,17 @@ class CommandLine:
         """Prints the number of fingers each player has"""
         
         str_list = []
-        player_count = 1
         for player in g.players:
             if isinstance(player, Human):
-                str_list.append( "Human " + str(player_count) + ": (")
+                str_list.append( "Human " + str(player.id) + ": (")
             else:
-                str_list.append( "Bot " + str(player_count) + ": (")
+                str_list.append( "Bot " + str(player.id) + ": (")
             
             for hand in player.hands:
                 str_list.append(" " + str(hand.alive_fingers) + " ")
                 
             str_list.append(")   |   ")
-            player_count += 1
+
         
         print(''.join(str_list))
     
@@ -62,7 +61,7 @@ class Game:
         self.num_players = num_human_players + num_bot_players
         self.num_hands = num_hands
         self.num_fingers = num_fingers
-        self.is_over = False
+        self.game_is_over = False
         self.ui  = CommandLine()
         
         self.players = [Human(x+1, num_hands, num_fingers) for x in range(num_human_players)]
@@ -71,10 +70,20 @@ class Game:
         print("Humans: ", self.num_human_players, "\nBots: ", self.num_bot_players, 
               "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
     
+    
+    def hit(self, giving_hand, recieving_hand):
+        pass
+    
+    def split(self, giving_hand, recieving_hand, giving_amount):
+        pass
+    
+    
+    
+    
     def play(self):
         """Game Loop"""
         i = 0
-        while self.is_over == False:
+        while self.game_is_over == False:
             self.ui.display_game_state()
             if isinstance(self.players[i], Human):
                 self.players[i].get_next_move()
