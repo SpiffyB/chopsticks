@@ -5,7 +5,6 @@ Created on 6 Sep 2019
 '''
 
 
-
 class Hand:
     def __init__(self, num_fingers):
         self.total_fingers = num_fingers
@@ -39,6 +38,28 @@ class CommandLine:
         
         print(''.join(str_list))
     
+    def get_user_input(self, player_id):
+        """Gets the user input and returns the appropriate action or an error"""
+        ui = input("Human " + str(player_id) + "'s turn: ")
+        ui_list = ui.strip().lower().split()
+        
+        try:
+            if ui_list[0] in ['h','hit']:
+                #Input: Hit, PLayerBeingHit GivingHand, RecievingHand
+                return ("h", ui_list[1], ui_list[2], ui_list[3])
+            elif ui_list[0] in ['s','split']:
+                #Input: Split, GivingHand, RecievingHand, Giving Amount
+                return ("s", ui_list[1], ui_list[2], ui_list[3])
+            elif ui_list[0] == "help":
+                pass
+            else:
+                print("Not a Valid Command")
+                return "error"
+        except:
+            print("Not a Valid Command")
+            return "error"
+ 
+ 
         
 class Player:
     def __init__(self, player_id,num_hands, num_fingers):
@@ -48,8 +69,18 @@ class Player:
         
 class Human(Player):
     def get_next_move(self):
-        move = input("Human " + str(self.id) + "'s turn: ")
-    
+        """Gets the next move from the player"""
+        #TODO Check if move is valid
+        is_error = True
+        while is_error:
+            move = g.ui.get_user_input(self.id) 
+            if move != "error":
+                is_error = False 
+                    
+        return move
+        
+        
+        
 class Bot(Player):
     pass
 
@@ -71,10 +102,10 @@ class Game:
               "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
     
     
-    def hit(self, giving_hand, recieving_hand):
+    def hit(self, player_id, giving_hand, recieving_hand):
         pass
     
-    def split(self, giving_hand, recieving_hand, giving_amount):
+    def split(self, player_id, giving_hand, recieving_hand, giving_amount):
         pass
     
     
@@ -86,18 +117,23 @@ class Game:
         while self.game_is_over == False:
             self.ui.display_game_state()
             if isinstance(self.players[i], Human):
-                self.players[i].get_next_move()
+                move = self.players[i].get_next_move()
             else:
+                move = ("h","1","1","1") #TODO Change this
                 print("Bots Move")
-                
-            i+=1
             
+            if move[0] == "h":
+                self.hit(move[0], move[1], move[2])
+            
+            
+            i+=1
             if(i >= self.num_players):
                 i=0
 
-        
-g = Game(2,0,2,5)
-g.play()
+
+if __name__ == '__main__':
+    g = Game(2,0,2,5)
+    g.play()
 
         
         
