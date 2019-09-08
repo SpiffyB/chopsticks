@@ -132,6 +132,7 @@ class Game:
               "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
     
     
+    
     def hit(self, attack_player_id, defend_player_id, recieving_hand, giving_hand):
         """hits a player's hand with the current player's hand"""
         
@@ -147,7 +148,9 @@ class Game:
         pass
     
     
+    
     def check_if_game_over(self):
+        """Check if the game is over"""
         alive_count = 0
         for player in self.players:
             if player.is_alive == True:
@@ -169,6 +172,8 @@ class Game:
                         move = self.players[i].get_next_move()
                         if move[0] == "h":
                             is_valid_move = self.hit(i, move[1]-1, move[2]-1, move[3]-1)
+                        elif move[0] == "s":
+                            is_valid_move = self.split(i, move[1]-1, move[2]-1, move[3], move[4])
                             
                         
                         if is_valid_move == False:
