@@ -1,6 +1,6 @@
 .project
 .pydevproject
-/design/
+design/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
