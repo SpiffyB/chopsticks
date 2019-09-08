@@ -10,6 +10,24 @@ class Hand:
         self.total_fingers = num_fingers
         self.alive_fingers = 1
         self.is_alive = True
+        
+    def remove_fingers(self, num_fingers):
+        """Removes fingers from the hands"""
+        if self.alive_fingers - num_fingers >= 0:
+            self.alive_fingers = self.alive_fingers - num_fingers
+            return True
+    
+    def add_fingers(self, move_type, num_fingers):
+        """Adds alive fingers to the hand"""
+        if (move_type == "h" and self.alive_fingers == 0) or num_fingers == 0:
+            return False
+        elif num_fingers + self.alive_fingers >= self.total_fingers:
+            self.is_alive = False
+            self.alive_fingers = 0
+            return True
+        else:
+            self.alive_fingers = self.alive_fingers + num_fingers
+            return True
 
 
 class Gui:
@@ -45,13 +63,13 @@ class CommandLine:
         
         try:
             if ui_list[0] in ['h','hit']:
-                #Input: Hit, PLayerBeingHit GivingHand, RecievingHand
-                return ("h", ui_list[1], ui_list[2], ui_list[3])
+                #Input: Hit, PLayerBeingHit RecievingHand, GivingHand
+                return ("h",  int(ui_list[1]), int(ui_list[2]), int(ui_list[3]))
             elif ui_list[0] in ['s','split']:
-                #Input: Split, GivingHand, RecievingHand, Giving Amount
-                return ("s", ui_list[1], ui_list[2], ui_list[3])
+                #Input: Split, Hand1, Hand2, Amount1, Amount2
+                return ("s", int(ui_list[1]), int(ui_list[2]), int(ui_list[3]), int(ui_list[4]))
             elif ui_list[0] == "help":
-                pass
+                return "help"
             else:
                 print("Not a Valid Command")
                 return "error"
@@ -65,8 +83,20 @@ class Player:
     def __init__(self, player_id,num_hands, num_fingers):
         self.hands = [Hand(num_fingers) for x in range(num_hands)]
         self.id = player_id
+        self.is_alive = True
         
+    def check_if_alive(self):
+        """Checks if the player is alive"""
+        if self.is_alive == False:
+            return False
         
+        for hand in self.hands:
+            if hand.is_alive == True:
+                return True
+        self.is_alive = False
+        return False
+
+  
 class Human(Player):
     def get_next_move(self):
         """Gets the next move from the player"""
@@ -74,7 +104,7 @@ class Human(Player):
         is_error = True
         while is_error:
             move = g.ui.get_user_input(self.id) 
-            if move != "error":
+            if move != "error" and move != "help":
                 is_error = False 
                     
         return move
@@ -102,35 +132,58 @@ class Game:
               "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
     
     
-    def hit(self, player_id, giving_hand, recieving_hand):
+    def hit(self, attack_player_id, defend_player_id, recieving_hand, giving_hand):
+        """hits a player's hand with the current player's hand"""
+        
+        if attack_player_id == defend_player_id and giving_hand == recieving_hand:
+            return False
+        
+        is_valid_move = self.players[defend_player_id].hands[recieving_hand].add_fingers("h",self.players[attack_player_id].hands[giving_hand].alive_fingers)
+        
+        return is_valid_move
+
+    
+    def split(self, player_id, hand_1, hand_2, amount_1, amount_2):
         pass
     
-    def split(self, player_id, giving_hand, recieving_hand, giving_amount):
-        pass
     
-    
+    def check_if_game_over(self):
+        alive_count = 0
+        for player in self.players:
+            if player.is_alive == True:
+                alive_count += 1
+            if alive_count > 1:
+                return False
+        return True
     
     
     def play(self):
         """Game Loop"""
         i = 0
         while self.game_is_over == False:
-            self.ui.display_game_state()
-            if isinstance(self.players[i], Human):
-                move = self.players[i].get_next_move()
-            else:
-                move = ("h","1","1","1") #TODO Change this
-                print("Bots Move")
-            
-            if move[0] == "h":
-                self.hit(move[0], move[1], move[2])
-            
-            
+            if self.players[i].check_if_alive() == True:
+                self.ui.display_game_state()
+                if isinstance(self.players[i], Human):
+                    is_valid_move = False
+                    while is_valid_move == False:
+                        move = self.players[i].get_next_move()
+                        if move[0] == "h":
+                            is_valid_move = self.hit(i, move[1]-1, move[2]-1, move[3]-1)
+                            
+                        
+                        if is_valid_move == False:
+                            print("Not A Valid Move")
+    
+                else:
+                    move = ("h","1","1","1") #TODO Change this
+                    print("Bots Move")
+                    
+            self.game_is_over = self.check_if_game_over()
             i+=1
             if(i >= self.num_players):
                 i=0
-
-
+        print("Game Over")
+        
 if __name__ == '__main__':
     g = Game(2,0,2,5)
     g.play()
