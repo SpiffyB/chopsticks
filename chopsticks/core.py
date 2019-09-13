@@ -148,6 +148,7 @@ class Game:
     
     def split(self, player_id, hand_1, hand_2, amount_1, amount_2):
         """Splits the fingers between two hands"""
+
         
         if hand_1 >self.num_hands - 1:
             print('Select a hand')
@@ -206,7 +207,8 @@ class Game:
             self.players[player_id].hands[hand_1].alive_fingers = amount_1
             self.players[player_id].hands[hand_2].alive_fingers = amount_2
             return True
-    
+
+
     
     
     def check_if_game_over(self):
