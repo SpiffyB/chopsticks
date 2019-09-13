@@ -145,7 +145,16 @@ class Game:
 
     
     def split(self, player_id, hand_1, hand_2, amount_1, amount_2):
-        pass
+        """Splits the fingers between two hands"""
+        hand_1_fingers = self.players[player_id].hands[hand_1].alive_fingers
+        hand_2_fingers = self.players[player_id].hands[hand_2].alive_fingers
+        
+        #TODO Check if move is valid
+        
+        self.players[player_id].hands[hand_1].alive_fingers = amount_1
+        self.players[player_id].hands[hand_2].alive_fingers = amount_2
+        
+        return True
     
     
     
