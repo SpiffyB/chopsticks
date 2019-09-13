@@ -116,7 +116,7 @@ class Bot(Player):
 
 
 class Game:
-    def __init__(self, num_human_players, num_bot_players, num_hands, num_fingers, verbose=True):
+    def __init__(self, num_human_players, num_bot_players, num_hands, num_fingers):
         self.num_human_players = num_human_players
         self.num_bot_players = num_bot_players
         self.num_players = num_human_players + num_bot_players
@@ -128,9 +128,8 @@ class Game:
         self.players = [Human(x+1, num_hands, num_fingers) for x in range(num_human_players)]
         self.players += [Bot(x+1, num_hands, num_fingers) for x in range(num_bot_players)]
         
-        if verbose == True:
-            print("Humans: ", self.num_human_players, "\nBots: ", self.num_bot_players, 
-                  "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
+        print("Humans: ", self.num_human_players, "\nBots: ", self.num_bot_players, 
+              "\nHands per Player: ", self.num_hands, "\nFingers per hand: ", self.num_fingers , "\n")
     
     
     

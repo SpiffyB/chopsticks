@@ -6,5 +6,4 @@ setup(name='chopsticks',
       description='chopsticks game',
       author='Tom MacArthur & Luca Bianchi',
       packages=['chopsticks'],
-      scripts=['test/test_core',]
      )
