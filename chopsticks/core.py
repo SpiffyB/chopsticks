@@ -17,6 +17,7 @@ class Game:
         self.num_hands = num_hands
         self.num_fingers = num_fingers
         self.game_is_over = False
+        self.logic = logic.Logic()
         self.ui  = CommandLine()
         
         self.players = [Human(x+1, num_hands, num_fingers) for x in range(num_human_players)]

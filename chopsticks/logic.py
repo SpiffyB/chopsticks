@@ -1,8 +1,8 @@
 class Logic:
-
-    def hit(self, attack_player_id, defend_player_id, recieving_hand, giving_hand):
+    def hit(self, g, attack_player_id, defend_player_id, recieving_hand, giving_hand):
         """hits a player's hand with the current player's hand"""
         
+        #move validation
         if attack_player_id == defend_player_id and giving_hand == recieving_hand:
             return False
         

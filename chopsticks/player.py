@@ -24,7 +24,7 @@ class Hand:
             return True
 
 class Player:
-    def __init__(self, player_id,num_hands, num_fingers):
+    def __init__(self, player_id, num_hands, num_fingers):
         self.hands = [Hand(num_fingers) for x in range(num_hands)]
         self.id = player_id
         self.is_alive = True
@@ -46,7 +46,7 @@ class Human(Player):
         #TODO Check if move is valid
         is_error = True
         while is_error:
-            move = g.ui.get_user_input(self.id,g) 
+            move = g.ui.get_user_input(g, self.id) 
             if move != "error" and move != "help":
                 is_error = False         
         return move
