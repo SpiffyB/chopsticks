@@ -1,8 +1,10 @@
 '''
 Created on 6 Sep 2019
 
-@author: Luca Bianchi 
+Authors: Luca Bianchi 
          Tom MacArthur
+
+Description: Core functionality module for the Chopsticks game. Contains the game class
 '''
 from player import Human, Bot, Hand, Player
 from user_interface import Ui, Gui, CommandLine
@@ -10,6 +12,21 @@ import logic
 
 
 class Game:
+    """
+    Class for running one instance of a game
+
+    Parameters
+    ----------
+    num_human_players: int
+        Number of human players
+    num_bot_players: int
+        Number of bot players
+    num_hands: int
+        Number of hands that each player has
+    num_fingers: int
+        Number of fingers that each hand has
+
+    """
     def __init__(self, num_human_players, num_bot_players, num_hands, num_fingers):
         self.num_human_players = num_human_players
         self.num_bot_players = num_bot_players
