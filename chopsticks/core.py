@@ -1,8 +1,10 @@
 '''
 Created on 6 Sep 2019
 
-@author: Luca Bianchi 
+Authors: Luca Bianchi 
          Tom MacArthur
+
+Description: Core functionality module for the Chopsticks game. Contains the game class
 '''
 from player import Human, Bot, Hand, Player
 from user_interface import Ui, Gui, CommandLine
