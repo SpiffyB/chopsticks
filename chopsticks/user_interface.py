@@ -1,3 +1,10 @@
+"""
+Created on 6 Sep 2019
+
+Authors: Luca Bianchi 
+         Tom MacArthur
+"""
+
 from player import Human, Bot, Player, Hand
 
 class Ui:
