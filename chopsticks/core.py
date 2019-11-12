@@ -38,9 +38,9 @@ class Game:
                     while is_valid_move == False:
                         move = self.players[i].get_next_move(self)
                         if move[0] == "h":
-                            is_valid_move = self.hit(i, move[1]-1, move[2]-1, move[3]-1)
+                            is_valid_move = self.logic.hit(self, i, move[1]-1, move[2]-1, move[3]-1)
                         elif move[0] == "s":
-                            is_valid_move = self.split(i, move[1]-1, move[2]-1, move[3], move[4])
+                            is_valid_move = self.logic.split(self, i, move[1]-1, move[2]-1, move[3], move[4])
                             
                         
                         if is_valid_move == False:
@@ -50,7 +50,7 @@ class Game:
                     move = ("h","1","1","1") #TODO Change this
                     print("Bots Move")
                     
-            self.game_is_over = self.check_if_game_over()
+            self.game_is_over = self.logic.check_if_game_over(self)
             i+=1
             if(i >= self.num_players):
                 i=0
