@@ -1,3 +1,9 @@
+"""
+Created on 6 Sep 2019
+
+Authors: Luca Bianchi 
+         Tom MacArthur
+"""
 
 class Hand:
     def __init__(self, num_fingers):

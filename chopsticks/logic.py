@@ -1,6 +1,38 @@
+"""
+Created on 6 Sep 2019
+
+Authors: Luca Bianchi 
+         Tom MacArthur
+
+Description: Object which contains the game logic
+"""
+
 class Logic:
+    """
+    Class for game logic
+    """
     def hit(self, g, attack_player_id, defend_player_id, recieving_hand, giving_hand):
-        """hits a player's hand with the current player's hand"""
+        """
+        hits a player's hand with the current player's hand and updates the Game object g
+        
+        Parameters
+        ----------
+        g: Game object
+            reference to the game object
+        attack_player_id: int
+            Id of the attacking player
+        defend_player_id: int
+            Id of the defending player
+        recieving_hand: int
+            Id of the hand of the defending player
+        giving_hand: int
+            Id of the hand of the attacking player
+
+        Returns
+        -------
+        is_valid_move: bool
+            True if the move is valid, otherwise false
+        """
         
         #move validation
         if attack_player_id == defend_player_id and giving_hand == recieving_hand:
@@ -15,7 +47,29 @@ class Logic:
 
     
     def split(self, g, player_id, hand_1, hand_2, amount_1, amount_2):
-        """Splits the fingers between two hands"""
+        """
+        Splits the fingers between two hands and updates the Game object g
+        
+        Parameters
+        ----------
+        g: Game object
+            reference to the game object
+        player_id: int
+            Id of the player
+        hand_1: int
+            First hand which is splitting
+        hand_2: int
+            Second hand which is splitting
+        amount_1: int
+            New number of fingers on hand 1
+        amount_2: int
+            New number of fingers on hand 2
+            
+        Returns
+        -------
+        is_valid_move: bool
+            True if the move is valid, otherwise false
+        """
 
         
         if hand_1 > g.num_hands - 1:
@@ -78,7 +132,18 @@ class Logic:
 
 
     def check_if_game_over(self, g):
-        """Check if the game is over"""
+        """
+        Check if the game is over
+        
+        Parameter
+        ---------
+        g: Game object
+            reference to the game object
+
+        Returns
+        -------
+        True if 2 or more players are alive, otherwise false
+        """
         alive_count = 0
         for player in g.players:
             if player.is_alive == True:
