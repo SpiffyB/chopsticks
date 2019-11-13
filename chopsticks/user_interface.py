@@ -5,7 +5,7 @@ Authors: Luca Bianchi
          Tom MacArthur
 """
 
-from player import Human, Bot, Player, Hand
+from chopsticks.player import Human, Bot, Player, Hand
 from abc import ABC, abstractmethod
 
 class Ui(ABC):

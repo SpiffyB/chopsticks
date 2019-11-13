@@ -6,9 +6,9 @@ Authors: Luca Bianchi
 
 Description: Core functionality module for the Chopsticks game. Contains the game class
 '''
-from player import Human, Bot, Hand, Player
-from user_interface import Ui, Gui, CommandLine
-import logic
+from chopsticks.player import Human, Bot, Hand, Player
+from chopsticks.user_interface import Ui, Gui, CommandLine
+import chopsticks.logic as logic
 
 
 class Game:
