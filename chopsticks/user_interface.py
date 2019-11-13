@@ -47,8 +47,6 @@ class CommandLine(Ui):
                 str_list.append(" " + str(hand.alive_fingers) + " ")
                 
             str_list.append(")   |   ")
-
-        
         print(''.join(str_list))
     
     def get_user_input(self, g, player_id):
