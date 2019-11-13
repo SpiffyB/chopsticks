@@ -6,13 +6,28 @@ Authors: Luca Bianchi
 """
 
 from player import Human, Bot, Player, Hand
+from abc import ABC, abstractmethod
 
-class Ui:
+class Ui(ABC):
+    """Abstract Class for the user interface"""
     def __init__(self):
         pass
 
+    @abstractmethod
+    def display_game_state(self, g):
+        pass
+
+    @abstractmethod
+    def get_user_input(self, g, player_id):
+        pass
+
 class Gui(Ui):
-    pass
+    """Graphical user interface"""
+    def display_game_state(self, g):
+        pass
+
+    def get_user_input(self, g, player_id):
+        pass
 
 class CommandLine(Ui):
     """For Printing to the console"""
@@ -21,7 +36,6 @@ class CommandLine(Ui):
     
     def display_game_state(self, g):
         """Prints the number of fingers each player has"""
-        
         str_list = []
         for player in g.players:
             if isinstance(player, Human):
