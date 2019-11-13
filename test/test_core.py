@@ -8,7 +8,8 @@ import chopsticks.user_interface as user_interface
 
 
 
-class TestChopsticks(unittest.TestCase):
+class TestLogic(unittest.TestCase):
+    """Spilt"""
     def test_split_correct1(self):
         g = core.Game(2,0,2,5)
         g.players[0].hands[0].alive_fingers = 1
@@ -101,6 +102,43 @@ class TestChopsticks(unittest.TestCase):
         g.players[0].hands[1].alive_fingers = 3
         self.assertEqual(g.logic.split(g,0,0,2,2,2), False)
     
+
+    """Hit"""
+    def test_hit_correct_1(self):
+        g = core.Game(2,0,2,5)
+        g.players[0].hands[0].alive_fingers = 1
+        g.players[0].hands[1].alive_fingers = 3
+        self.assertEqual(g.logic.hit(g,0,1,1,0), True)
+
+    def test_hit_correct_2(self):
+        g = core.Game(2,0,2,5)
+        g.players[0].hands[0].alive_fingers = 4
+        g.players[0].hands[1].alive_fingers = 3
+        self.assertEqual(g.logic.hit(g,0,1,1,0), True)
+
+    def test_hit_dead_hand_1(self):
+        g = core.Game(2,0,2,5)
+        g.players[0].hands[0].alive_fingers = 1
+        g.players[1].hands[1].alive_fingers = 0
+        self.assertEqual(g.logic.hit(g,0,1,1,0), False)
+    
+    def test_hit_dead_hand_2(self):
+        g = core.Game(2,0,2,5)
+        g.players[0].hands[0].alive_fingers = 0
+        g.players[1].hands[1].alive_fingers = 1
+        self.assertEqual(g.logic.hit(g,0,1,1,0), False)
+
+    def test_hit_dead_hand_3(self):
+        g = core.Game(2,0,2,5)
+        g.players[0].hands[0].alive_fingers = 0
+        g.players[0].hands[1].alive_fingers = 1
+        self.assertEqual(g.logic.hit(g,0,0,1,0), False)
+
+    def test_hit_dead_hand_4(self):
+        g = core.Game(2,0,2,5)
+        g.players[0].hands[0].alive_fingers = 0
+        g.players[0].hands[1].alive_fingers = 0
+        self.assertEqual(g.logic.hit(g,0,0,1,0), False)
     
 
 
