@@ -8,6 +8,7 @@ Authors: Luca Bianchi
 from chopsticks.player import Human, Bot, Player, Hand
 from abc import ABC, abstractmethod
 
+
 class Ui(ABC):
     """Abstract Class for the user interface"""
     def __init__(self):
@@ -18,14 +19,6 @@ class Ui(ABC):
         pass
 
     @abstractmethod
-    def get_user_input(self, g, player_id):
-        pass
-
-class Gui(Ui):
-    """Graphical user interface"""
-    def display_game_state(self, g):
-        pass
-
     def get_user_input(self, g, player_id):
         pass
 
@@ -69,3 +62,13 @@ class CommandLine(Ui):
         except:
             print("Not a Valid Command")
             return "error"
+
+
+class Gui(Ui):
+    """Graphical user interface"""
+
+    def display_game_state(self, g):
+        pass
+
+    def get_user_input(self, g, player_id):
+        pass
