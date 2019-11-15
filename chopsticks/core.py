@@ -59,7 +59,7 @@ class Game:
                         elif move[0] == "s":
                             is_valid_move = self.logic.split(self, i, move[1]-1, move[2]-1, move[3], move[4])
                             
-                        
+                        is_valid_move = True
                         if is_valid_move == False:
                             print("Not A Valid Move")
     
@@ -71,6 +71,7 @@ class Game:
             i+=1
             if(i >= self.num_players):
                 i=0
+            self.game_is_over = True
         print("Game Over")
         
 if __name__ == '__main__':

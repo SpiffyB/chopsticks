@@ -65,10 +65,19 @@ class CommandLine(Ui):
 
 
 class Gui(Ui):
+    from flask import Flask
+    app = Flask(__name__)
     """Graphical user interface"""
+
+    def __init__(self):
+        import chopsticks.app as flapp
+        self.fa = flapp.flask_app()
+        self.fa.start()
+
 
     def display_game_state(self, g):
         pass
 
     def get_user_input(self, g, player_id):
-        pass
+        self.fa.hello_world()
+        return ("h",1,1,1)
