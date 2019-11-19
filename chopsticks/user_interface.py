@@ -72,9 +72,8 @@ class Gui(Ui):
         self.fa = flapp.flask_app()
         self.fa.start()
 
-
     def display_game_state(self, g):
-        pass
+        self.fa.hello_world()
 
     def get_user_input(self, g, player_id):
         self.fa.hello_world()
