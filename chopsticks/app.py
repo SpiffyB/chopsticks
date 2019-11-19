@@ -1,24 +1,23 @@
 from flask import Flask, redirect, url_for, request, render_template
-from flask_socketio import SocketIO
-import threading
+from threading import Thread
 
+class flask_app(Thread):
+    app = Flask(__name__)
 
-app = Flask(__name__)
-socketio = SocketIO(app)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
-socketio.run(app, host = "localhost", port = 3000, debug = True)
+    def __init__(self):
+        Thread.__init__(self)
+        self.app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+        self.app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
 
-@app.route('/')
-def hello_world(self):
-    """Print 'Hello, world!' as the response body."""
-    return "Hello World"
+    def run(self):
 
-def messageReceived(methods=['GET', 'POST']):
-    print('message was received!!!')
+        self.app.run(host="localhost", port="6969", debug=True, use_reloader=False)
 
-### Receiving WebSocket Messages ###
-@socketio.on('my event')
-def handle_my_custom_event(json, methods=['GET', 'POST']):
-    print('received my event: ' + str(json))
-    socketio.emit('my response', json, callback=messageReceived)
+    @app.route('/')
+    def hello_world(self):
+        """Print 'Hello, world!' as the response body."""
+        return "Hello World"
+
+    def messageReceived(methods=['GET', 'POST']):
+        print('message was received!!!')
+

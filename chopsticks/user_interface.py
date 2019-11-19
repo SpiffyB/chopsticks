@@ -6,6 +6,7 @@ Authors: Luca Bianchi
 """
 
 from chopsticks.player import Human, Bot, Player, Hand
+import chopsticks.app as flapp
 from abc import ABC, abstractmethod
 
 
@@ -65,12 +66,9 @@ class CommandLine(Ui):
 
 
 class Gui(Ui):
-    from flask import Flask
-    app = Flask(__name__)
     """Graphical user interface"""
 
     def __init__(self):
-        import chopsticks.app as flapp
         self.fa = flapp.flask_app()
         self.fa.start()
 

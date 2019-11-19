@@ -35,7 +35,8 @@ class Game:
         self.num_fingers = num_fingers
         self.game_is_over = False
         self.logic = logic.Logic()
-        self.ui  = Gui()
+        self.ui  = CommandLine()
+        self.ui2  = Gui()
         
         self.players = [Human(x+1, num_hands, num_fingers) for x in range(num_human_players)]
         self.players += [Bot(x+1, num_hands, num_fingers) for x in range(num_bot_players)]
@@ -71,7 +72,7 @@ class Game:
             i+=1
             if(i >= self.num_players):
                 i=0
-            self.game_is_over = True
+            self.game_is_over = False
         print("Game Over")
         
 if __name__ == '__main__':
