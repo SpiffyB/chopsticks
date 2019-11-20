@@ -6,8 +6,9 @@ Authors: Luca Bianchi
 """
 
 from chopsticks.player import Human, Bot, Player, Hand
-import chopsticks.app as flapp
+import chopsticks.app.app as flapp
 from abc import ABC, abstractmethod
+import time
 
 
 class Ui(ABC):

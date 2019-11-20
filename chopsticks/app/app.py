@@ -10,7 +10,9 @@ def hello_world_route():
     """Print 'Hello, world!' as the response body."""
     return "Hello World"
 
-
+@app.route('/index')
+def index():
+    return render_template('index.html', title='Home', user="test_user")
 
 
 class flask_app(Thread):

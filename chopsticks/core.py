@@ -61,7 +61,6 @@ class Game:
                             
                         if is_valid_move == False:
                             print("Not A Valid Move")
-    
                 else:
                     move = ("h","1","1","1") #TODO Change this
                     print("Bots Move")
