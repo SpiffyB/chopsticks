@@ -8,7 +8,9 @@ Description: Core functionality module for the Chopsticks game. Contains the gam
 '''
 from chopsticks.player import Human, Bot, Hand, Player
 from chopsticks.user_interface import Ui, Gui, CommandLine
+import argparse
 import chopsticks.logic as logic
+
 
 
 class Game:
