@@ -1,9 +1,10 @@
 from flask import Flask, redirect, url_for, request, render_template
 from threading import Thread
+from . import config
+
 
 app = Flask(__name__)
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
-app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
+app.config.from_object(config.Config)
 
 @app.route('/')
 def hello_world_route():
