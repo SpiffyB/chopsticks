@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for, request, render_template
 from threading import Thread
-from . import config
+from . import config, forms
 
 
 app = Flask(__name__)
@@ -13,7 +13,8 @@ def hello_world_route():
 
 @app.route('/index')
 def index():
-    return render_template('index.html', title='Home', user="test_user")
+    form = forms.GameForm()
+    return render_template('index.html', title='Home', user="test_user", form=form)
 
 
 class flask_app(Thread):
