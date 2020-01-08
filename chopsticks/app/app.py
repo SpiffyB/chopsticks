@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, request, render_template
+from flask import Flask, redirect, url_for, request, render_template, flash
 from threading import Thread
 from . import config, forms
 
@@ -11,9 +11,11 @@ def hello_world_route():
     """Print 'Hello, world!' as the response body."""
     return "Hello World"
 
-@app.route('/index')
+@app.route('/index', methods=['GET','POST'])
 def index():
     form = forms.GameForm()
+    if form.validate_on_submit():
+        flash('button pressed {}'.format(form.btn_player1_hand1.data))
     return render_template('index.html', title='Home', user="test_user", form=form)
 
 
