@@ -50,18 +50,18 @@ class Game:
         """Game Loop"""
         i = 0
         while self.game_is_over == False:
-            if self.players[i].check_if_alive() == True:
+            if self.players[i].check_if_alive():
                 self.ui.display_game_state(self)
                 if isinstance(self.players[i], Human):
                     is_valid_move = False
-                    while is_valid_move == False:
+                    while not is_valid_move:
                         move = self.players[i].get_next_move(self)
                         if move[0] == "h":
                             is_valid_move = self.logic.hit(self, i, move[1]-1, move[2]-1, move[3]-1)
                         elif move[0] == "s":
                             is_valid_move = self.logic.split(self, i, move[1]-1, move[2]-1, move[3], move[4])
                             
-                        if is_valid_move == False:
+                        if not is_valid_move:
                             print("Not A Valid Move")
                 else:
                     move = ("h","1","1","1") #TODO Change this

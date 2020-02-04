@@ -18,6 +18,13 @@ def index():
         flash('button pressed {}'.format(form.btn_player1_hand1.data))
     return render_template('index.html', title='Home', user="test_user", form=form)
 
+@app.route('/game', methods=['GET','POST'])
+def main_game():
+    form = forms.GameForm()
+    if form.validate_on_submit():
+        flash('button pressed {}'.format(form.btn_player1_hand1.data))
+    return render_template('main_game.html', title='Chopsticks', user="test_user", form=form)
+
 
 class flask_app(Thread):
     global app
@@ -25,9 +32,9 @@ class flask_app(Thread):
     def run(self):
         app.run(host="localhost", port="6969", debug=True, use_reloader=False)
 
-    def hello_world(self):
+    def main_game(self):
         """Print 'Hello, world!' as the response body."""
-        return hello_world_route()
+        return main_game()
 
     def messageReceived(methods=['GET', 'POST']):
         print('message was received!!!')

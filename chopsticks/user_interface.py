@@ -74,8 +74,8 @@ class Gui(Ui):
         self.fa.start()
 
     def display_game_state(self, g):
-        self.fa.hello_world()
+        self.fa.main_game()
 
     def get_user_input(self, g, player_id):
-        self.fa.hello_world()
+        self.fa.main_game()
         return ("h",1,1,1)
