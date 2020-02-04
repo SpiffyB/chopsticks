@@ -29,7 +29,7 @@ class Game:
         Number of fingers that each hand has
 
     """
-    def __init__(self, num_human_players, num_bot_players, num_hands, num_fingers):
+    def __init__(self, num_human_players, num_bot_players, num_hands, num_fingers, ui):
         self.num_human_players = num_human_players
         self.num_bot_players = num_bot_players
         self.num_players = num_human_players + num_bot_players
@@ -37,7 +37,7 @@ class Game:
         self.num_fingers = num_fingers
         self.game_is_over = False
         self.logic = logic.Logic()
-        self.ui  = Gui()
+        self.ui  = ui
         
         self.players = [Human(x+1, num_hands, num_fingers) for x in range(num_human_players)]
         self.players += [Bot(x+1, num_hands, num_fingers) for x in range(num_bot_players)]
@@ -74,7 +74,7 @@ class Game:
         print("Game Over")
         
 if __name__ == '__main__':
-    g = Game(2,0,2,5)
+    g = Game(2,0,2,5, Gui())
     g.play()
 
         

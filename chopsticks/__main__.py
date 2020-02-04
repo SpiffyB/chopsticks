@@ -7,6 +7,7 @@ Created on 6 Sep 2019
 import chopsticks.core as core
 import sys
 import argparse
+from chopsticks.user_interface import Ui, Gui, CommandLine
 
 def parse_arguments():
     parser = argparse.ArgumentParser(description="Chopticks Game")
@@ -26,7 +27,8 @@ def main():
     g = core.Game(args.num_humans,
                   args.num_bots,
                   args.num_hands,
-                  args.num_fingers)
+                  args.num_fingers,
+                  Gui())
     g.play()
 
 

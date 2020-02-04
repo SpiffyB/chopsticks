@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 {% block content %}
     <h1>Chopsticks</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
+        <p>
+        </p>
         <p>{{ form.btn_player2_hand1() }} {{ form.btn_player2_hand2() }}</p>
+        <p>
+            <textarea name="player1_hand1_fingers">11</textarea>
+            <textarea name="player1_hand2_fingers">12</textarea>
+        </p>
         <p>{{ form.btn_player1_hand1() }} {{ form.btn_player1_hand2() }}</p>
         <p>{{ form.btn_hit() }} {{ form.btn_split() }}</p>
     </form>
